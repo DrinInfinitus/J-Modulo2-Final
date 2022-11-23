@@ -25,7 +25,7 @@ public class User {
 	@SequenceGenerator(name ="user_sequence",
 						sequenceName = "user_Sequence",
 						initialValue = 1, allocationSize = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence") //Generator ele cria uma sequencia só pra entidade
 	@Column(name = "ID_USER", nullable = false)
 	private Integer id;
 	

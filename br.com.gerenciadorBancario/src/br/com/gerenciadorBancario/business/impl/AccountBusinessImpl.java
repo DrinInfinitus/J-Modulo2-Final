@@ -12,6 +12,8 @@ public class AccountBusinessImpl implements AccountBusiness{
 	@Override
 	public void transferencia(Account minhaConta, Double valor, Account contaTransferir) {
 		if (minhaConta.getBalance() >= valor) {
+			minhaConta.setBalance(minhaConta.getBalance() - valor);
+			contaTransferir.setBalance(contaTransferir.getBalance() + valor);
 			accountDAO.transfer(minhaConta, contaTransferir);
 		} else {
 			System.out.println("Taiz liso boy");

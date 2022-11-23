@@ -39,6 +39,14 @@ public class Account {
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 	
+	//fetch = tipo de carregamento
+	//Lazy = Tipo de carregamento preguiçoso
+	//Eager = Ele vai trazer tudo
+	//Cascade = O que acontece em cima acontece em baixo
+	//TargetEntity = Entidade Alvo
+	//@JoinColumn = faz a junção da coluna
+	//Nullable = Não pode criar conta sem usuario
+	//referencedColumnName = É a coluna que vai ser referenciada
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = User.class)
 	@JoinColumn(name = "ID_USER", nullable = false, referencedColumnName = "ID_USER")
 	private User user;
@@ -86,8 +94,8 @@ public class Account {
 		return user;
 	}
 	
-	public void setUser(User user) {
-		this.user = user;
+	public void setUser(Object object) {
+		this.user = (User) object;
 	}
 	
 	public String getPassword() {
@@ -102,8 +110,8 @@ public class Account {
 		return bank;
 	}
 	
-	public void setBank(Bank bank) {
-		this.bank = bank;
+	public void setBank(Object object) {
+		this.bank = (Bank) object;
 	}
 
 	@Override

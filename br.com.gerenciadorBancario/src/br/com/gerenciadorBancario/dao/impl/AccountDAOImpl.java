@@ -27,6 +27,9 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	@Override
+	//Precisa mudar Account para o que estiver retornando ex:String, int
+	//Mudar na interface DAO também
+	//Para procurar algo especifico usar ("Select a.password")
 	public Account searchAccount(Integer numConta) {
 		ent.getTransaction().begin();
 		Query query = ent.createQuery("SELECT a FROM Account a WHERE a.numAccount = :numAccount")
@@ -54,7 +57,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 	public Account infos(Account account) {
 		ent.getTransaction().begin();
-		Query query = ent.createQuery("SELECT a.numAccount, a.balance a FROM Account");
+		Query query = ent.createQuery("SELECT a.numAccount, a.balance FROM Account");
 		ent.getTransaction().commit();
 		return (Account) query;
 	}

@@ -4,8 +4,13 @@ import java.util.Calendar;
 
 import javax.persistence.EntityManager;
 
+import br.com.gerenciadorBancario.dao.AccountDAO;
+import br.com.gerenciadorBancario.dao.BankDAO;
+import br.com.gerenciadorBancario.dao.GenericDAO;
+import br.com.gerenciadorBancario.dao.UserDAO;
 import br.com.gerenciadorBancario.dao.impl.AccountDAOImpl;
 import br.com.gerenciadorBancario.dao.impl.BankDAOImpl;
+import br.com.gerenciadorBancario.dao.impl.GenericDAOImpl;
 import br.com.gerenciadorBancario.dao.impl.UserDAOImpl;
 import br.com.gerenciadorBancario.entities.Account;
 import br.com.gerenciadorBancario.entities.Bank;
@@ -16,9 +21,10 @@ public class GerenciadorBancario {
 
 	public static void main(String[] args) {
 		
-		AccountDAOImpl AccDAO = new AccountDAOImpl();
-		UserDAOImpl UserDAO = new UserDAOImpl();
-		BankDAOImpl BankDAO = new BankDAOImpl();
+		AccountDAO AccDAO = new AccountDAOImpl();
+		UserDAO UserDAO = new UserDAOImpl();
+		BankDAO BankDAO = new BankDAOImpl();
+		GenericDAO genericDAO = new GenericDAOImpl();
 		Account Acc = new Account();
 		Bank bank = new Bank();
 		User user = new User();
@@ -33,8 +39,8 @@ public class GerenciadorBancario {
 		bank.setCnpj("2356735443");
 		bank.setManager("Uel");
 		BankDAO.create(bank);
-		Acc.setUser(UserDAO.getId());
-		Acc.setBank(BankDAO.getId());
+		Acc.setUser(genericDAO.searchForID(user, 1));
+		Acc.setBank(genericDAO.searchForID(bank, 1));
 		Acc.setPassword("123456789");
 		Acc.setBalance(3000.00);
 		Acc.setNumConta(3275934);
