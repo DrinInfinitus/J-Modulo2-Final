@@ -1,6 +1,7 @@
 package br.com.gerenciadorBancario.dao.impl;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -23,8 +24,10 @@ public class GenericDAOImpl implements GenericDAO{
 	public Object searchForID(Object object, Integer id) {
 		try {
 		ent.getTransaction().begin();
-		String retorno = ent.find(object.getClass(), id).toString();
-		System.out.println(retorno);
+		Object retorno = ent.find(object.getClass(), id);
+		if (Objects.nonNull(retorno)) {
+			return retorno;
+		}
 		} catch (Exception e) {
 			System.err.println(e);
 			ent.getTransaction().rollback();
