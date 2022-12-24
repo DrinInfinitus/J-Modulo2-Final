@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.gerenciadorBancario.dao.UserDAO;
+import br.com.gerenciadorBancario.entities.Account;
 import br.com.gerenciadorBancario.entities.User;
 import br.com.gerenciadorBancario.util.JpaUtil;
 
@@ -45,13 +46,12 @@ public class UserDAOImpl implements UserDAO{
 			}
 	}
 	
-	public User getId() {
-		ent.getTransaction().begin();
-		String hql = "SELECT U.id_user FROM User U WHERE U.id_user = 1";
-		Query query = ent.createQuery(hql);
-		User query2 = (User) query;
-		return query2;
+	@Override
+	public Object getId(Object object, int id) {
+			ent.getTransaction().begin();
+			Query query = ent.createQuery("SELECT u.id_user FROM User WHERE id_user = :id_user ")
+					.setParameter("id_user", id).setMaxResults(1);
+				ent.getTransaction().commit();
+		return query.getSingleResult();
 	}
-
-
 }

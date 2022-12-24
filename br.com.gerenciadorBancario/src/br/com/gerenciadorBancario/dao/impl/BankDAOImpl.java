@@ -1,9 +1,12 @@
 package br.com.gerenciadorBancario.dao.impl;
 
+import java.util.Objects;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.gerenciadorBancario.dao.BankDAO;
+import br.com.gerenciadorBancario.entities.Account;
 import br.com.gerenciadorBancario.entities.Bank;
 import br.com.gerenciadorBancario.entities.User;
 import br.com.gerenciadorBancario.util.JpaUtil;
@@ -15,7 +18,7 @@ public class BankDAOImpl implements BankDAO{
 	@Override
 	public Bank infos(Bank infos) {
 		ent.getTransaction().begin();
-		Query query = ent.createQuery("SELECT b.CNPJ, b.Manager b FROM Account WHERE id_bank = :id_bank ")
+		Query query = ent.createQuery("SELECT b.CNPJ, b.Manager FROM Account WHERE id_bank = :id_bank ")
 			.setParameter("id_bank", infos).setMaxResults(1);
 		ent.getTransaction().commit();
 		return (Bank) query;
@@ -43,11 +46,14 @@ public class BankDAOImpl implements BankDAO{
 			}
 	}
 	
-	public Bank getId() {
-		ent.getTransaction().begin();
-		String hql = "SELECT B.id_bank FROM Bank B WHERE B.id_bank = 1";
-		Query query = ent.createQuery(hql);
-		return (Bank) query;
+	@Override
+	public Object getId(Object object, int id) {
+			ent.getTransaction().begin();
+			Query query = ent.createQuery("SELECT b.id_bank FROM Bank WHERE id_bank = :id_bank ")
+					.setParameter("id_bank", id).setMaxResults(1);
+				ent.getTransaction().commit();
+		return query.getSingleResult();
 	}
+	
 
 }

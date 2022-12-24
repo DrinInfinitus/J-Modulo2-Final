@@ -9,4 +9,6 @@ public interface BankDAO {
 	public Bank searchBanks (Integer numb);
 
 	public void create (Bank bank);
+	
+	public Object getId(Object object, int id);
 }

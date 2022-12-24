@@ -9,5 +9,7 @@ public interface UserDAO {
 	public User searchUser (Integer User);
 	
 	public void create (User user);
+	
+	public Object getId(Object object, int id);
 
 }

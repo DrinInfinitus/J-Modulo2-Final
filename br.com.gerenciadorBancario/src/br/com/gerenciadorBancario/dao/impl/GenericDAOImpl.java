@@ -32,7 +32,7 @@ public class GenericDAOImpl implements GenericDAO{
 			System.err.println(e);
 			ent.getTransaction().rollback();
 		} finally {
-		ent.close();
+			ent.close();
 		}
 		return null;
 	}
